@@ -1,2 +1,2 @@
-# DE Computer Science CSC215
-This is the general repository for my work in the CSC215 class through the Arlington Career Center. Any other repositories used for the class will be linked here as they are added. See also (now in a standalone repository) my [Altair8800 assembler](https://github.com/BrendanO123/Altair8080Assembler.git) for this class.
+# DE Computer Science CSC215 & CSC223
+This is the general repository for my work in the CSC215 & CSC223 class through the Arlington Career Center. Any other repositories used for the class will be linked here as they are added. See also (now in a standalone repository) my [Altair8800 assembler](https://github.com/BrendanO123/Altair8080Assembler.git) for this class.
