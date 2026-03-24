@@ -12,7 +12,7 @@ template <typename t>
 requires Hashable<t>
 bool Graph<t> :: insertNode(t value){
     if(nodes.find(value) != nodes.end()){return false;}
-    Node<t> node = new Node<t>(value);
+    Node<t>* node = new Node<t>(value);
     nodes.emplace(value, node);
     return true;
 }
@@ -69,8 +69,8 @@ template <typename t>
 void Graph<t> :: display(){
     for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
         t val = iterate->first;
-        Node<t> node = iterate->second;
-        vector<Node<t>*> adj = node.adjacentNodes;
+        Node<t>* node = iterate->second;
+        vector<Node<t>*> adj = node->adjacentNodes;
         cout << val << " has " << adj.size() << " neighbors:" << endl;
         for(int i = 0; i<adj.size(); i++){
             Node<t>* n = adj[i];
@@ -78,3 +78,5 @@ void Graph<t> :: display(){
         }
     }
 }
+
+template class Graph<int>;
