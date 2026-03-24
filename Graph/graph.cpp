@@ -44,9 +44,12 @@ Node<t>* Graph<t> :: fetchNode(t value){
 template <typename t>
 requires Hashable<t>
 bool Graph<t> :: del(t value){
-    if(nodes.find(value) == nodes.end()){return false;}
+    if(nodes.find(value) == nodes.end()){
+        return false;
+    }
     delete nodes.at(value);
     nodes.erase(value);
+    return true;
 }
 
 template <typename t>
