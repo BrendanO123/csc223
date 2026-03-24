@@ -15,13 +15,13 @@ struct Node{
 };
 template <typename t>
 class Graph{
-    unordered_map<string, Node<t>*> nodes;
-    bool insertNode(string name, t value);
-    bool connectNodes(string node1, string node2);
+    unordered_map<t, Node<t>*> nodes;
+    bool insertNode(t value);
+    bool connectNodes(t node1, t node2);
     bool connectNodes(Node<t>* node1, Node<t>* node2);
-    Node<t>* fetchNode(string name);
-    bool del(string name);
-    Node<t>* pop(string name);
-    Graph(){nodes = unordered_map<string, Node<t>*>();}
+    Node<t>* fetchNode(t name);
+    bool del(t name);
+    Node<t>* pop(t name);
+    Graph(){nodes = unordered_map<t, Node<t>*>();}
     ~Graph();
 };

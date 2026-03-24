@@ -3,15 +3,15 @@
 using namespace std;
 
 template <typename t>
-bool Graph<t> :: insertNode(string name, t value){
-    if(nodes.find(name) != nodes.end()){return false;}
+bool Graph<t> :: insertNode(t value){
+    if(nodes.find(value) != nodes.end()){return false;}
     Node node = new Node(value);
-    nodes.emplace(name, node);
+    nodes.emplace(value, node);
     return true;
 }
 
 template <typename t>
-bool Graph<t> :: connectNodes(string node1, string node2){
+bool Graph<t> :: connectNodes(t node1, t node2){
     return connectNodes(fetchNode(node1), fetchNode(node2));
 }
 
@@ -25,22 +25,22 @@ bool Graph<t> :: connectNodes(Node<t>* node1, Node<t>* node2){
 }
 
 template <typename t>
-Node<t>* Graph<t> :: fetchNode(string name){
-    if(nodes.find(name) == nodes.end()){return nullptr;}
-    return nodes.at(name);
+Node<t>* Graph<t> :: fetchNode(t value){
+    if(nodes.find(value) == nodes.end()){return nullptr;}
+    return nodes.at(value);
 }
 
 template <typename t>
-bool Graph<t> :: del(string name){
-    if(nodes.find(name) == nodes.end()){return false;}
-    delete nodes.at(name);
-    nodes.erase(name);
+bool Graph<t> :: del(t value){
+    if(nodes.find(value) == nodes.end()){return false;}
+    delete nodes.at(value);
+    nodes.erase(value);
 }
 template <typename t>
-Node<t>* Graph<t> :: pop(string name){
-    if(nodes.find(name) == nodes.end()){return nullptr;}
-    Node<t>* node = nodes.at(name);
-    nodes.erase(name);
+Node<t>* Graph<t> :: pop(t value){
+    if(nodes.find(value) == nodes.end()){return nullptr;}
+    Node<t>* node = nodes.at(value);
+    nodes.erase(value);
     return node;
 }
 
