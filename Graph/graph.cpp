@@ -5,7 +5,7 @@ using namespace std;
 
 template<typename t>
 requires Hashable<t>
-int Graph<t> :: nodeCount(){
+size_t Graph<t> :: nodeCount(){
     return nodes.size();
 }
 

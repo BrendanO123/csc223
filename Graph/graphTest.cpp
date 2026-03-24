@@ -8,12 +8,12 @@ using namespace std;
 template class Graph<int>;
 
 TEST_CASE("create and destroy graph"){
-    Graph<int> graph;
+    Graph<int> graph = Graph<int>();
     CHECK_EQ(graph.nodeCount(), 0);
 }
 
 TEST_CASE("insert nodes into graph and check node count"){
-    Graph<int> graph;
+    Graph<int> graph = Graph<int>();
     CHECK(graph.insertNode(1));
     CHECK(graph.insertNode(2));
     CHECK(graph.insertNode(3));
@@ -23,7 +23,7 @@ TEST_CASE("insert nodes into graph and check node count"){
 }
 
 TEST_CASE("insert and connect nodes in graph"){
-    Graph<int> graph;
+    Graph<int> graph = Graph<int>();
     CHECK(graph.insertNode(1));
     CHECK(graph.insertNode(2));
     CHECK(graph.insertNode(3));
@@ -45,7 +45,7 @@ TEST_CASE("insert and connect nodes in graph"){
 }
 
 TEST_CASE("delete nodes from graph"){
-    Graph<int> graph;
+    Graph<int> graph = Graph<int>();
     CHECK(graph.insertNode(1));
     CHECK(graph.insertNode(2));
     CHECK(graph.insertNode(3));

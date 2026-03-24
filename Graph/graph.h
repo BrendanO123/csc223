@@ -27,7 +27,7 @@ requires Hashable<t>
 class Graph{
     unordered_map<t, Node<t>*> nodes;
     public:
-        int nodeCount();
+        size_t nodeCount();
         bool insertNode(t value);
         bool connectNodes(t node1, t node2);
         bool connectNodes(Node<t>* node1, Node<t>* node2);
