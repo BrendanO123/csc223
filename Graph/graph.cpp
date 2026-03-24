@@ -1,6 +1,12 @@
 #include "graph.h"
+#include <iostream>
 
 using namespace std;
+
+template<typename t>
+int Graph<t> :: nodeCount(){
+    return nodes.size();
+}
 
 template <typename t>
 bool Graph<t> :: insertNode(t value){
@@ -49,5 +55,19 @@ Graph<t> ::  ~Graph(){
     for(auto iterate = nodes.begin(); iterate!=nodes.end();){
         delete iterate->second;
         iterate = nodes.erase(iterate);
+    }
+}
+
+template <typename t>
+void Graph<t> :: display(){
+    for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
+        t val = iterate->first;
+        Node<t> node = iterate->second;
+        vector<Node<t>*> adj = node.adjacentNodes;
+        cout << val << " has " << adj.size() << " neighbors:" << endl;
+        for(int i = 0; i<adj.size(); i++){
+            Node<t>* n = adj[i];
+            cout << " " << n->data << endl;
+        }
     }
 }
