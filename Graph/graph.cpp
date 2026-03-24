@@ -4,6 +4,7 @@
 using namespace std;
 
 template<typename t>
+requires Hashable<t>
 int Graph<t> :: nodeCount(){
     return nodes.size();
 }
@@ -12,7 +13,7 @@ template <typename t>
 requires Hashable<t>
 bool Graph<t> :: insertNode(t value){
     if(nodes.find(value) != nodes.end()){return false;}
-    Node<t> node = new Node<t>(value);
+    Node<t>* node = new Node<t>(value);
     nodes.emplace(value, node);
     return true;
 }
@@ -66,6 +67,7 @@ Graph<t> ::  ~Graph(){
 }
 
 template <typename t>
+requires Hashable<t>
 void Graph<t> :: display(){
     for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
         t val = iterate->first;
@@ -77,4 +79,16 @@ void Graph<t> :: display(){
             cout << " " << n->data << endl;
         }
     }
+}
+
+int main(){
+    Graph<int> graph = Graph<int>();
+    graph.insertNode(1);
+    cout << graph.fetchNode(1)->data << endl;
+    cout << graph.pop(1)->data << endl;
+    graph.insertNode(1);
+    graph.insertNode(2);
+    graph.connectNodes(1,2);
+    cout << graph.fetchNode(2)->adjacentNodes.at(0)->data << endl;
+    return 0;
 }
