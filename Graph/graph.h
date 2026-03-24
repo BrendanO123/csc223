@@ -17,9 +17,9 @@ template <typename t>
 requires Hashable<t>
 struct Node{
     t data;
-    vector<Node<t>*> adjacentNodes;
-    Node(t dat) : data(dat){adjacentNodes = vector<Node<t>*>();}
-    Node(){adjacentNodes = vector<Node<t>*>();}
+    unordered_map<t, Node<t>*> adjacentNodes;
+    Node(t dat) : data(dat){adjacentNodes = unordered_map<t, Node<t>*>();}
+    Node(){adjacentNodes = unordered_map<t, Node<t>*>();}
 };
 
 template <typename t>
