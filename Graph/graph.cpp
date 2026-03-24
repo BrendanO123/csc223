@@ -4,6 +4,7 @@
 using namespace std;
 
 template<typename t>
+requires Hashable<t>
 int Graph<t> :: nodeCount(){
     return nodes.size();
 }
@@ -66,6 +67,7 @@ Graph<t> ::  ~Graph(){
 }
 
 template <typename t>
+requires Hashable<t>
 void Graph<t> :: display(){
     for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
         t val = iterate->first;
