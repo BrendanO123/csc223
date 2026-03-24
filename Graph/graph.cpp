@@ -71,8 +71,8 @@ requires Hashable<t>
 void Graph<t> :: display(){
     for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
         t val = iterate->first;
-        Node<t> node = iterate->second;
-        vector<Node<t>*> adj = node.adjacentNodes;
+        Node<t>* node = iterate->second;
+        vector<Node<t>*> adj = node->adjacentNodes;
         cout << val << " has " << adj.size() << " neighbors:" << endl;
         for(int i = 0; i<adj.size(); i++){
             Node<t>* n = adj[i];
