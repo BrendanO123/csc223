@@ -80,15 +80,3 @@ void Graph<t> :: display(){
         }
     }
 }
-
-int main(){
-    Graph<int> graph = Graph<int>();
-    graph.insertNode(1);
-    cout << graph.fetchNode(1)->data << endl;
-    cout << graph.pop(1)->data << endl;
-    graph.insertNode(1);
-    graph.insertNode(2);
-    graph.connectNodes(1,2);
-    cout << graph.fetchNode(2)->adjacentNodes.at(0)->data << endl;
-    return 0;
-}
