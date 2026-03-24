@@ -3,11 +3,16 @@
 
 using namespace std;
 
+template<typename t>
+int Graph<t> :: nodeCount(){
+    return nodes.size();
+}
+
 template <typename t>
 requires Hashable<t>
 bool Graph<t> :: insertNode(t value){
     if(nodes.find(value) != nodes.end()){return false;}
-    Node node = new Node(value);
+    Node<t> node = new Node<t>(value);
     nodes.emplace(value, node);
     return true;
 }
@@ -60,14 +65,16 @@ Graph<t> ::  ~Graph(){
     }
 }
 
-int main(){
-    Graph<int> graph = Graph();
-    graph.insertNode(1);
-    cout << graph.fetchNode(1)->data << endl;
-    cout << graph.pop(1)->data << endl;
-    graph.insertNode(1);
-    graph.insertNode(2);
-    graph.connectNodes(1,2);
-    cout << graph.fetchNode(2)->adjacentNodes.at(0)->data << endl;
-    return 0;
+template <typename t>
+void Graph<t> :: display(){
+    for(auto iterate = nodes.begin(); iterate != nodes.end(); iterate++){
+        t val = iterate->first;
+        Node<t> node = iterate->second;
+        vector<Node<t>*> adj = node.adjacentNodes;
+        cout << val << " has " << adj.size() << " neighbors:" << endl;
+        for(int i = 0; i<adj.size(); i++){
+            Node<t>* n = adj[i];
+            cout << " " << n->data << endl;
+        }
+    }
 }

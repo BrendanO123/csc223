@@ -26,12 +26,15 @@ template <typename t>
 requires Hashable<t>
 class Graph{
     unordered_map<t, Node<t>*> nodes;
-    bool insertNode(t value);
-    bool connectNodes(t node1, t node2);
-    bool connectNodes(Node<t>* node1, Node<t>* node2);
-    Node<t>* fetchNode(t name);
-    bool del(t name);
-    Node<t>* pop(t name);
-    Graph(){nodes = unordered_map<t, Node<t>*>();}
-    ~Graph();
+    public:
+        int nodeCount();
+        bool insertNode(t value);
+        bool connectNodes(t node1, t node2);
+        bool connectNodes(Node<t>* node1, Node<t>* node2);
+        Node<t>* fetchNode(t name);
+        bool del(t name);
+        Node<t>* pop(t name);
+        void display();
+        Graph(){nodes = unordered_map<t, Node<t>*>();}
+        ~Graph();
 };

@@ -1,8 +1,43 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "graph.h"
 #include "doctest.h"
 
 using namespace std;
 
-TEST_CASE("idk") {
+TEST_CASE("create and destroy graph"){
+    Graph<int> graph;
+    CHECK_EQ(graph.nodeCount(), 0);
+    delete &graph;
+}
 
+TEST_CASE("insert nodes into graph"){
+    Graph<int> graph;
+    CHECK(graph.insertNode(1));
+    CHECK(graph.insertNode(2));
+    CHECK(graph.insertNode(3));
+    CHECK_EQ(graph.nodeCount(), 3);
+    CHECK_FALSE(graph.insertNode(1));
+    CHECK_EQ(graph.nodeCount(), 3);
+}
+
+TEST_CASE("insert and connect nodes in graph"){
+    Graph<int> graph;
+    CHECK(graph.insertNode(1));
+    CHECK(graph.insertNode(2));
+    CHECK(graph.insertNode(3));
+    CHECK(graph.connectNodes(1, 2));
+    CHECK(graph.connectNodes(2, 3));
+    CHECK_FALSE(graph.connectNodes(1, 4));
+    CHECK_FALSE(graph.connectNodes(4, 1));
+    // check that the nodes are connected
+    vector<Node<int>*> adjacentNodes1 = graph.fetchNode(1)->adjacentNodes;
+    vector<Node<int>*> adjacentNodes2 = graph.fetchNode(2)->adjacentNodes
+    vector<Node<int>*> adjacentNodes3 = graph.fetchNode(3)->adjacentNodes;
+    CHECK_EQ(adjacentNodes1.size(), 1);
+    CHECK_EQ(adjacentNodes1[0]->data, 2);
+    CHECK_EQ(adjacentNodes2.size(), 2);
+    CHECK_EQ(adjacentNodes2[0]->data, 1);
+    CHECK_EQ(adjacentNodes2[1]->data, 3);
+    CHECK_EQ(adjacentNodes3.size(), 1);
+    CHECK_EQ(adjacentNodes3[0]->data, 2);
 }
