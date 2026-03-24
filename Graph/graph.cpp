@@ -80,3 +80,6 @@ void Graph<t> :: display(){
         }
     }
 }
+
+// for doctest
+template class Graph<int>;
