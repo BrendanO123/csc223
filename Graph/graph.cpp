@@ -5,7 +5,7 @@ using namespace std;
 template <typename t>
 bool Graph<t> :: insertNode(t value){
     if(nodes.find(value) != nodes.end()){return false;}
-    Node node = new Node(value);
+    Node<t> node = new Node<t>(value);
     nodes.emplace(value, node);
     return true;
 }
