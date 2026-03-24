@@ -4,6 +4,9 @@
 
 using namespace std;
 
+// for doctest
+template class Graph<int>;
+
 TEST_CASE("create and destroy graph"){
     Graph<int> graph;
     CHECK_EQ(graph.nodeCount(), 0);

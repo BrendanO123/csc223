@@ -48,6 +48,7 @@ bool Graph<t> :: del(t value){
     delete nodes.at(value);
     nodes.erase(value);
 }
+
 template <typename t>
 requires Hashable<t>
 Node<t>* Graph<t> :: pop(t value){
@@ -80,6 +81,3 @@ void Graph<t> :: display(){
         }
     }
 }
-
-// for doctest
-template class Graph<int>;
