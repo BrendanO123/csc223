@@ -29,8 +29,8 @@ requires Hashable<t>
 bool Graph<t> :: connectNodes(Node<t>* node1, Node<t>* node2){
     if(node1 == nullptr){return false;}
     if(node2 == nullptr){return false;}
-    node1->adjacentNodes.emplace(node1->data, node2);
-    node2->adjacentNodes.emplace(node2->data, node1);
+    node1->adjacentNodes.emplace(node2->data, node2);
+    node2->adjacentNodes.emplace(node1->data, node1);
     return true;
 }
 
@@ -44,8 +44,9 @@ Node<t>* Graph<t> :: fetchNode(t value){
 template <typename t>
 requires Hashable<t>
 bool disconnect(Node<t>* node){
-    for(int i = node->adjacentNodes.size()-1; i >=0; i--){
-        
+    for(auto iterate = node->adjacentNodes.begin(); iterate != node->adjacentNodes.end(); iterate++){
+        Node<t>* node1 = iterate->second;
+        node1->adjacentNodes.erase(node->data);
     }
     return true;
 }
