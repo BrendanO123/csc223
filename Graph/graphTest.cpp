@@ -53,3 +53,13 @@ TEST_CASE("delete nodes from graph"){
     CHECK_EQ(graph.nodeCount(), 2);
     CHECK_FALSE(graph.del(4));
 }
+
+TEST_CASE("display graph no errors"){
+    Graph<int> graph;
+    CHECK(graph.insertNode(1));
+    CHECK(graph.insertNode(2));
+    CHECK(graph.insertNode(3));
+    CHECK(graph.connectNodes(1, 2));
+    CHECK(graph.connectNodes(2, 3));
+    graph.display();
+}
