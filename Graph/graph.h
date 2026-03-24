@@ -3,17 +3,27 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <functional>
+#include <concepts>
 
 using namespace std;
 
+template<typename T>
+concept Hashable = requires(T a){
+    { std::hash<T>{}(a) } -> std::convertible_to<size_t>;
+};
+
 template <typename t>
+requires Hashable<t>
 struct Node{
     t data;
     vector<Node<t>*> adjacentNodes;
     Node(t dat) : data(dat){adjacentNodes = vector<Node<t>*>();}
     Node(){adjacentNodes = vector<Node<t>*>();}
 };
+
 template <typename t>
+requires Hashable<t>
 class Graph{
     unordered_map<t, Node<t>*> nodes;
     bool insertNode(t value);
