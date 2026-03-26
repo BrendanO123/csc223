@@ -4,9 +4,6 @@
 
 using namespace std;
 
-// for doctest
-template class Graph<int>;
-
 TEST_CASE("create and destroy graph"){
     Graph<int> graph = Graph<int>();
     CHECK_EQ(graph.nodeCount(), 0);
@@ -32,16 +29,16 @@ TEST_CASE("insert and connect nodes in graph"){
     CHECK_FALSE(graph.connectNodes(1, 4));
     CHECK_FALSE(graph.connectNodes(4, 1));
     // check that the nodes are connected
-    vector<Node<int>*> adjacentNodes1 = graph.fetchNode(1)->adjacentNodes;
-    vector<Node<int>*> adjacentNodes2 = graph.fetchNode(2)->adjacentNodes;
-    vector<Node<int>*> adjacentNodes3 = graph.fetchNode(3)->adjacentNodes;
+    unordered_map<int, Node<int>*> adjacentNodes1 = graph.fetchNode(1)->adjacentNodes;
+    unordered_map<int, Node<int>*> adjacentNodes2 = graph.fetchNode(2)->adjacentNodes;
+    unordered_map<int, Node<int>*> adjacentNodes3 = graph.fetchNode(3)->adjacentNodes;
     CHECK_EQ(adjacentNodes1.size(), 1);
-    CHECK_EQ(adjacentNodes1[0]->data, 2);
+    CHECK_EQ(adjacentNodes1.begin()->second->data, 2);
     CHECK_EQ(adjacentNodes2.size(), 2);
-    CHECK_EQ(adjacentNodes2[0]->data, 1);
-    CHECK_EQ(adjacentNodes2[1]->data, 3);
+    CHECK(adjacentNodes2.find(1) != adjacentNodes2.end());
+    CHECK(adjacentNodes2.find(3) != adjacentNodes2.end());
     CHECK_EQ(adjacentNodes3.size(), 1);
-    CHECK_EQ(adjacentNodes3[0]->data, 2);
+    CHECK_EQ(adjacentNodes3.begin()->second->data, 2);
 }
 
 TEST_CASE("delete nodes from graph"){
