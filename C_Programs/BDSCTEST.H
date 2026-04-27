@@ -12,6 +12,7 @@ unsigned currentAssertNumber;
 unsigned failedCurrentTest;
 
 unsigned firstTest;
+unsigned assertPassed;
 
 START_TESTING(file)
 char* file; 
@@ -37,6 +38,9 @@ incPass() {
 }
 
 #define TEST_CASE(description)  printf("\n\t%s\n", description); tests++; incPass(); currentAssertNumber = 0; failedCurrentTest = 0; firstTest = 0;
+#define AID_P(msg) printf("\t\t\033[0;32m%s\033[0;37m.\n", msg);
+#define AID_F(msg) printf("\t\t\033[0;31m%s\033[0;37m.\n", msg);
+#define ASSERT_IDENTIFIER(msg) if(assertPassed) AID_P(msg); else AID_F(msg);
 
 ASSERT(boolExp) 
 int boolExp; {
@@ -58,10 +62,15 @@ char *strI[], *strJ[]; {
     }
 }
 
+#define MSSERT(boolExp, msg) ASSERT(boolExp); ASSERT_IDENTIFIER(msg);
+#define MSSERT_EQU(val1, val2, msg) ASSERT_EQU(val1 == val2); ASSERT_IDENTIFIER(msg);
+#define MSSERT_STR(strI, strJ, msg) ASSERT_STR(strI, strJ); ASSERT_IDENTIFIER(msg);
+
 PASS() {
     asserts++;
     currentAssertNumber++;
     passAsserts++;
+    assertPassed = 1;
     printf("\t\033[0;32mAssertion %d passed\033[0;37m.\n", currentAssertNumber);
 }
 
@@ -72,6 +81,7 @@ FAIL() {
         failedCurrentTest = 1;
         failedTests++;
     }
+    assertPassed = 0;
     printf("\t\033[0;31mAssertion %d failed\033[0;37m.\n", currentAssertNumber);
     failedAsserts++;
 }

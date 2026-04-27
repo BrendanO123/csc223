@@ -8,8 +8,8 @@ main() {
     TEST_CASE("Test can create node") {
         struct node* mynode;
         mynode = mknode(42);
-        ASSERT(mynode->num == 42);
-        ASSERT(mynode->next == NULL);
+        MSSERT_EQU(mynode->num, 42, "Node value not set correctly");
+        MSSERT_EQU(mynode->next, NULL, "Node next pointer not initialized to NULL");
     }
 
     TEST_CASE("Test dellst"){
@@ -18,16 +18,16 @@ main() {
         struct node* mynode1; mynode1 = mknode(12);
         list->next = mynode1;
 
-        ASSERT(list->num == 42);
-        ASSERT(list->next == mynode1);
-        ASSERT(mynode1->num == 12);
-        ASSERT(mynode1->next == NULL);
+        MSSERT_EQU(list->num, 42, "Node value not set correctly");
+        MSSERT_EQU(list->next, mynode1, "Node next pointer not set correctly");
+        MSSERT_EQU(mynode1->num, 12, "Node value not set correctly");
+        MSSERT_EQU(mynode1->next, NULL, "Node next pointer not initialized to NULL");
 
         endListAtNode(list);
-        ASSERT(list->next == NULL);
+        MSSERT_EQU(list->next, NULL, "List not terminated correctly");
 
         dellst(&list);
-        ASSERT(list == NULL);
+        MSSERT_EQU(list, NULL, "List not deleted correctly");
     }
 
     END_TESTING();
