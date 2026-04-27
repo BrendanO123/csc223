@@ -49,9 +49,14 @@ int boolExp; {
     else
         FAIL();
 }
-
-#define ASSERT_EQU(val1, val2) if (val1 == val2) PASS(); else FAIL();
-
+ASSERT_EQU(val1, val2)
+int val1; int val2; {
+    if (val1 == val2)
+        PASS();
+    else {
+        FAIL();
+    }
+}
 ASSERT_STR(strI, strJ) 
 char *strI[], *strJ[]; {
     if (strcmp(strI, strJ) == 0) {
@@ -62,9 +67,16 @@ char *strI[], *strJ[]; {
     }
 }
 
-#define MSSERT(boolExp, msg) ASSERT(boolExp); ASSERT_IDENTIFIER(msg);
-#define MSSERT_EQU(val1, val2, msg) ASSERT_EQU(val1 == val2); ASSERT_IDENTIFIER(msg);
-#define MSSERT_STR(strI, strJ, msg) ASSERT_STR(strI, strJ); ASSERT_IDENTIFIER(msg);
+MSSERT(boolExp, msg)
+int boolExp; char* msg; {
+    ASSERT(boolExp); ASSERT_IDENTIFIER(msg);
+}
+MSSERT_EQU(val1, val2, msg) int val1; int val2; char* msg; {
+    ASSERT_EQU(val1, val2); ASSERT_IDENTIFIER(msg);
+}
+MSSERT_STR(strI, strJ, msg) char* strI; char* strJ; char* msg; {
+    ASSERT_STR(strI, strJ); ASSERT_IDENTIFIER(msg);
+}
 
 PASS() {
     asserts++;
