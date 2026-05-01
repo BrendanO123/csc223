@@ -40,7 +40,14 @@ incPass() {
 #define TEST_CASE(description)  printf("\n\t%s\n", description); tests++; incPass(); currentAssertNumber = 0; failedCurrentTest = 0; firstTest = 0;
 #define AID_P(msg) printf("\t\t\033[0;32m%s\033[0;37m.\n", msg);
 #define AID_F(msg) printf("\t\t\033[0;31m%s\033[0;37m.\n", msg);
-#define ASSERT_IDENTIFIER(msg) if(assertPassed) AID_P(msg); else AID_F(msg);
+ECHO_MESSAGE(msg) 
+char* msg; {
+    if(assertPassed) {
+        AID_P(msg); 
+    } else {
+        AID_F(msg);
+    }
+}
 
 ASSERT(boolExp) 
 int boolExp; {
@@ -62,20 +69,67 @@ char *strI[], *strJ[]; {
     if (strcmp(strI, strJ) == 0) {
         PASS();
     } else {
-        printf("\t%s != %s", strI, strJ);
         FAIL();
+        printf("\t\t\033[0;31m%s != %s\033[0;37m.\n", strI, strJ);
     }
+}
+
+ASSERT_INCREASING(arr, n)
+int arr[]; int n; {
+    int i;
+    for (i = 0; i < n - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            FAIL();
+            printf("\t\t\033[0;31mArray is not increasing at index %d: %d > %d\033[0;37m.\n", i, arr[i], arr[i + 1]);
+            return;
+        }
+    }
+    PASS();
+}
+ASSERT_DECREASING(arr, n)
+int arr[]; int n; {
+    int i;
+    for (i = 0; i < n - 1; i++) {
+        if (arr[i] < arr[i+1]) {
+            FAIL();
+            printf("\t\t\033[0;31mArray is not decreasing at index %d: %d < %d\033[0;37m.\n", i, arr[i], arr[i + 1]);
+            return;
+        }
+    }
+    PASS();
+}
+ASSERT_ARR_EQU(expected, actual, n)
+int expected[]; int actual[]; int n; {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (expected[i] != actual[i]) {
+            FAIL();
+            printf("\t\t\033[0;31mArray elements differ at index %d: expected %d, got %d\033[0;37m.\n", i, expected[i], actual[i]);
+            return;
+        }
+    }
+    PASS();
 }
 
 MSSERT(boolExp, msg)
 int boolExp; char* msg; {
-    ASSERT(boolExp); ASSERT_IDENTIFIER(msg);
+    ASSERT(boolExp); ECHO_MESSAGE(msg);
 }
 MSSERT_EQU(val1, val2, msg) int val1; int val2; char* msg; {
-    ASSERT_EQU(val1, val2); ASSERT_IDENTIFIER(msg);
+    ASSERT_EQU(val1, val2); ECHO_MESSAGE(msg);
 }
 MSSERT_STR(strI, strJ, msg) char* strI; char* strJ; char* msg; {
-    ASSERT_STR(strI, strJ); ASSERT_IDENTIFIER(msg);
+    ASSERT_STR(strI, strJ); ECHO_MESSAGE(msg);
+}
+
+MSSERT_INCREASING(arr, n, msg) int arr[]; int n; char* msg; {
+    ASSERT_INCREASING(arr, n); ECHO_MESSAGE(msg);
+}
+MSSERT_DECREASING(arr, n, msg) int arr[]; int n; char* msg; {
+    ASSERT_DECREASING(arr, n); ECHO_MESSAGE(msg);
+}
+MSSERT_ARR_EQU(expected, actual, n, msg) int expected[]; int actual[]; int n; char* msg; {
+    ASSERT_ARR_EQU(expected, actual, n); ECHO_MESSAGE(msg);
 }
 
 PASS() {
