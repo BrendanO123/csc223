@@ -64,7 +64,7 @@ int val1; int val2; {
         FAIL();
     }
 }
-ASSERT_STR(strI, strJ) 
+ASSERT_STR_EQU(strI, strJ) 
 char *strI[], *strJ[]; {
     if (strcmp(strI, strJ) == 0) {
         PASS();
@@ -118,8 +118,8 @@ int boolExp; char* msg; {
 MSSERT_EQU(val1, val2, msg) int val1; int val2; char* msg; {
     ASSERT_EQU(val1, val2); ECHO_MESSAGE(msg);
 }
-MSSERT_STR(strI, strJ, msg) char* strI; char* strJ; char* msg; {
-    ASSERT_STR(strI, strJ); ECHO_MESSAGE(msg);
+MSSERT_STR_EQU(strI, strJ, msg) char* strI; char* strJ; char* msg; {
+    ASSERT_STR_EQU(strI, strJ); ECHO_MESSAGE(msg);
 }
 
 MSSERT_INCREASING(arr, n, msg) int arr[]; int n; char* msg; {

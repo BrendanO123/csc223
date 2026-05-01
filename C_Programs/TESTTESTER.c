@@ -9,16 +9,16 @@ main() {
         ASSERT(0==1);
         ASSERT_EQU(1, 1);
         ASSERT_EQU(1, 2);
-        ASSERT_STR("hello", "hello");
-        ASSERT_STR("hello", "world");
+        ASSERT_STR_EQU("hello", "hello");
+        ASSERT_STR_EQU("hello", "world");
     }
     TEST_CASE("Basic Functions With Messages"){
         MSSERT(1==1, "This assertion should pass");
         MSSERT(0==1, "This assertion should fail");
         MSSERT_EQU(1, 1, "This assertion should pass");
         MSSERT_EQU(1, 2, "This assertion should fail");
-        MSSERT_STR("hello", "hello", "This assertion should pass");
-        MSSERT_STR("hello", "world", "This assertion should fail");
+        MSSERT_STR_EQU("hello", "hello", "This assertion should pass");
+        MSSERT_STR_EQU("hello", "world", "This assertion should fail");
     }
     TEST_CASE("Array Assertions") {
         int arr1[5]; initw(arr1, "1, 2, 3, 4, 5");
