@@ -9,7 +9,7 @@ struct BSTREE{
     struct node* root;
 };
 
-struct node* mknode(int num);
+struct node* mkTnode(int num);
 struct BSTREE* mkBSTree(int num);
 struct node* insert(struct BSTREE* tree, int num);
 char removeNode(struct BSTREE* tree, struct node* node);

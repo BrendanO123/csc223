@@ -2,7 +2,7 @@
 #include "BSTREE.H"
 #define NULL 0
 
-struct node* mknode(Num) int Num; {
+struct node* mkTnode(Num) int Num; {
     struct node* x;
     x = alloc(sizeof(*x));
     x->num = Num;
@@ -14,11 +14,11 @@ struct node* mknode(Num) int Num; {
 
 struct BSTREE* mkBSTree(n) int n; {
     struct BSTREE* tree; tree = alloc(sizeof(*tree));
-    tree->root = mknode(n);
+    tree->root = mkTnode(n);
     return tree;
 }
 struct node* insert(tree, Num) struct BSTREE* tree; int Num; {
-    struct node* newNode; newNode = mknode(Num);
+    struct node* newNode; newNode = mkTnode(Num);
     if(tree->root == NULL){
         tree->root = newNode;
         return newNode;

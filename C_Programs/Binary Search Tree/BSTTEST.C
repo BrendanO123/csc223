@@ -7,7 +7,7 @@ main() {
 
     TEST_CASE("Test can create node") {
         struct node* mynode;
-        mynode = mknode(42);
+        mynode = mkTnode(42);
         MSSERT_EQU(mynode->num, 42, "Node value not set correctly");
         MSSERT_EQU(mynode->left, NULL, "Node left pointer not initialized to NULL");
         MSSERT_EQU(mynode->right, NULL, "Node right pointer not initialized to NULL");
