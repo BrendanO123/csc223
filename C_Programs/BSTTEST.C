@@ -105,6 +105,32 @@ main() {
         MSSERT_EQU(tree8->root->right, NULL, "Node right pointer not set to NULL after popping max");
         dellTree(tree8);
     }
+    TEST_CASE("Keeps Sorted for Many Nodes"){
+        struct BSTREE* tree9;
+        tree9 = mkBSTree(42);
+        insert(tree9, 12);
+        insert(tree9, 54);
+        insert(tree9, 6);
+        insert(tree9, 18);
+        insert(tree9, 48);
+        insert(tree9, 60);
+        removeNum(tree9, 54);
+        removeNum(tree9, 12);
+        removeNum(tree9, 60);
+        insert(tree9, 20);
+        insert(tree9, 47);
+        insert(tree9, 5);
+        MSSERT_EQU(find(tree9, 6)->num, 6, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 18)->num, 18, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 48)->num, 48, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 47)->num, 47, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 5)->num, 5, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 20)->num, 20, "Node not found correctly");
+        MSSERT_EQU(find(tree9, 54), NULL, "Nonexistent node should return NULL");
+        MSSERT_EQU(max(tree9), 48, "Max value not found correctly");
+        MSSERT_EQU(min(tree9), 5, "Min value not found correctly");
+        dellTree(tree9);
+    }
 
     END_TESTING();
 }
