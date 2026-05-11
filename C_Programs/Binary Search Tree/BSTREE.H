@@ -1,22 +1,22 @@
-struct node{
+struct BSTnode{
     int num;
-    struct node* left;
-    struct node* right;
-    struct node* parent;
+    struct BSTnode* left;
+    struct BSTnode* right;
+    struct BSTnode* parent;
 };
 
 struct BSTREE{
-    struct node* root;
+    struct BSTnode* root;
 };
 
-struct node* mkTnode(int num);
+struct BSTnode* mkTnode(int num);
 struct BSTREE* mkBSTree(int num);
-struct node* insert(struct BSTREE* tree, int num);
-char removeNode(struct BSTREE* tree, struct node* node);
+struct BSTnode* insert(struct BSTREE* tree, int num);
+char removeNode(struct BSTREE* tree, struct BSTnode* BSTnode);
 char removeNum(struct BSTREE* tree, int num);
-struct node* find(struct BSTREE* tree, int num);
-struct node* minNode(struct BSTREE* tree);
-struct node* maxNode(struct BSTREE* tree);
+struct BSTnode* find(struct BSTREE* tree, int num);
+struct BSTnode* minNode(struct BSTREE* tree);
+struct BSTnode* maxNode(struct BSTREE* tree);
 int max(struct BSTREE* tree);
 int min(struct BSTREE* tree);
 char popMax(struct BSTREE* tree);

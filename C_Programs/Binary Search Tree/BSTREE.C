@@ -2,8 +2,8 @@
 #include "BSTREE.H"
 #define NULL 0
 
-struct node* mkTnode(Num) int Num; {
-    struct node* x;
+struct BSTnode* mkTnode(Num) int Num; {
+    struct BSTnode* x;
     x = alloc(sizeof(*x));
     x->num = Num;
     x->left = NULL;
@@ -17,13 +17,13 @@ struct BSTREE* mkBSTree(n) int n; {
     tree->root = mkTnode(n);
     return tree;
 }
-struct node* insert(tree, Num) struct BSTREE* tree; int Num; {
-    struct node* newNode; newNode = mkTnode(Num);
+struct BSTnode* insert(tree, Num) struct BSTREE* tree; int Num; {
+    struct BSTnode* newNode; newNode = mkTnode(Num);
     if(tree->root == NULL){
         tree->root = newNode;
         return newNode;
     }
-    struct node* current; current = tree->root;
+    struct BSTnode* current; current = tree->root;
     while(1){
         if(Num < current->num){
             if(current->left == NULL){
@@ -47,32 +47,32 @@ struct node* insert(tree, Num) struct BSTREE* tree; int Num; {
 char removeNum(tree, num) struct BSTREE* tree; int num; {
     return removeNode(tree, find(tree, num));
 }
-char removeNode(tree, Node) struct BSTREE* tree; struct node* Node; {
-    if(Node == NULL){return -1;}
-    if(Node->left == NULL && Node->right == NULL){
-        if(Node->parent == NULL){tree->root = NULL;}
-        else if(Node->parent->left == Node){Node->parent->left = NULL;}
-        else{Node->parent->right = NULL;}
+char removeNode(tree, BSTNode) struct BSTREE* tree; struct BSTnode* BSTNode; {
+    if(BSTNode == NULL){return -1;}
+    if(BSTNode->left == NULL && BSTNode->right == NULL){
+        if(BSTNode->parent == NULL){tree->root = NULL;}
+        else if(BSTNode->parent->left == BSTNode){BSTNode->parent->left = NULL;}
+        else{BSTNode->parent->right = NULL;}
     }
-    else if(Node->left != NULL && Node->right != NULL){
-        struct node* successor; successor = Node->right;
+    else if(BSTNode->left != NULL && BSTNode->right != NULL){
+        struct BSTnode* successor; successor = BSTNode->right;
         while(successor->left != NULL){successor = successor->left;}
         int temp; temp = successor->num;
         removeNode(tree, successor);
-        Node->num = temp;
+        BSTNode->num = temp;
     }
     else{
-        struct node* child; child = ((Node->left != NULL) ? Node->left : Node->right);
-        if(Node->parent == NULL){tree->root = child;}
-        else if(Node->parent->left == Node){Node->parent->left = child;}
-        else{Node->parent->right = child;}
-        child->parent = Node->parent;
+        struct BSTnode* child; child = ((BSTNode->left != NULL) ? BSTNode->left : BSTNode->right);
+        if(BSTNode->parent == NULL){tree->root = child;}
+        else if(BSTNode->parent->left == BSTNode){BSTNode->parent->left = child;}
+        else{BSTNode->parent->right = child;}
+        child->parent = BSTNode->parent;
     }
-    free(Node);
+    free(BSTNode);
     return 0;
 }
-struct node* find(tree, Num) struct BSTREE* tree; int Num; {
-    struct node* current; current = tree->root;
+struct BSTnode* find(tree, Num) struct BSTREE* tree; int Num; {
+    struct BSTnode* current; current = tree->root;
     while(current != NULL){
         if(Num < current->num){current = current->left;}
         else if(Num > current->num){current = current->right;}
@@ -80,15 +80,15 @@ struct node* find(tree, Num) struct BSTREE* tree; int Num; {
     }
     return current;
 }
-struct node* maxNode(tree) struct BSTREE* tree; {
+struct BSTnode* maxNode(tree) struct BSTREE* tree; {
     if(tree->root == NULL){return NULL;}
-    struct node* current; current = tree->root;
+    struct BSTnode* current; current = tree->root;
     while(current->right != NULL){current = current->right;}
     return current;
 }
-struct node* minNode(tree) struct BSTREE* tree; {
+struct BSTnode* minNode(tree) struct BSTREE* tree; {
     if(tree->root == NULL){return NULL;}
-    struct node* current; current = tree->root;
+    struct BSTnode* current; current = tree->root;
     while(current->left != NULL){current = current->left;}
     return current;
 }
@@ -106,12 +106,12 @@ char popMin(tree) struct BSTREE* tree; {
 }
 void dellTree(tree) struct BSTREE* tree; {
     if(tree->root == NULL){free(tree); return;}
-    struct node* current; current = tree->root;
+    struct BSTnode* current; current = tree->root;
     while(current != NULL){
         if(current->left != NULL){current = current->left;}
         else if(current->right != NULL){current = current->right;}
         else{
-            struct node* Parent; Parent = current->parent;
+            struct BSTnode* Parent; Parent = current->parent;
             free(current);
             if(Parent != NULL){
                 if(Parent->left == current){Parent->left = NULL;}
